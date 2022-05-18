@@ -182,6 +182,7 @@
 <script>
 import { db } from '@/main'
 import { collection, doc, getDocs, setDoc, deleteDoc, addDoc } from 'firebase/firestore/lite';
+import { calendarAxios } from '@/plugins/axios'
 export default {
   data: () => ({
     focus: '',
@@ -209,17 +210,23 @@ export default {
     this.getEvents();
   },
   methods: {
+    // async getEvents(){
+    //   const snapshot = await getDocs(collection(db, 'calEvent'));
+    //   const events = [];
+    //   snapshot.docs.map(doc => {
+    //     // console.log(doc.data());
+    //     let appData = doc.data();
+    //     appData.id = doc.id;
+    //     events.push(appData);
+    //   });
+    //   this.events = events;
+    // },
     async getEvents(){
-      const snapshot = await getDocs(collection(db, 'calEvent'));
-      const events = [];
-      snapshot.docs.map(doc => {
-        // console.log(doc.data());
-        let appData = doc.data();
-        appData.id = doc.id;
-        events.push(appData);
-      });
-      this.events = events;
+      await calendarAxios()
+        .then(r => console.log(r))
+        .catch(e => console.error(e.message))
     },
+
     async addEvent(){
       if(this.name && this.start && this.end){
         await addDoc(collection(db, 'calEvent'), {
@@ -311,7 +318,6 @@ export default {
         const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
         const second = new Date(first.getTime() + secondTimestamp)
 
-        console.log(this.names)
         events.push({
           name: this.names[this.rnd(0, this.names.length - 1)],
           start: first,

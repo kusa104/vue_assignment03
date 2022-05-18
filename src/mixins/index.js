@@ -1,4 +1,4 @@
-import axios from '@/plugins/axios'
+import { loginAxios } from '@/plugins/axios'
 import store from '@/store'
 import Code from '@/static/Code'
 
@@ -18,7 +18,7 @@ export default {
          */
         async $api(url, method, data, errorCallback) {
 
-            return axios({
+            return loginAxios({
                 headers: {
                     Authorization: `Bearer ${store.getters['user/token']}`
                 },
