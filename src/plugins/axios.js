@@ -15,3 +15,8 @@ export const loginAxios = axios.create({
 export const calendarAxios = axios.create({
   baseURL: 'http://localhost:5000/vue-calendar-f1cfa/us-central1/calendar',
 })
+
+export const kakaoAxios = axios.create({
+  baseURL: 'https://dapi.kakao.com/v2',
+  headers: {'Content-Type': 'application/json'},
+})

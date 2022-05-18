@@ -210,22 +210,22 @@ export default {
     this.getEvents();
   },
   methods: {
-    // async getEvents(){
-    //   const snapshot = await getDocs(collection(db, 'calEvent'));
-    //   const events = [];
-    //   snapshot.docs.map(doc => {
-    //     // console.log(doc.data());
-    //     let appData = doc.data();
-    //     appData.id = doc.id;
-    //     events.push(appData);
-    //   });
-    //   this.events = events;
-    // },
     async getEvents(){
-      await calendarAxios()
-        .then(r => console.log(r))
-        .catch(e => console.error(e.message))
+      const snapshot = await getDocs(collection(db, 'calEvent'));
+      const events = [];
+      snapshot.docs.map(doc => {
+        // console.log(doc.data());
+        let appData = doc.data();
+        appData.id = doc.id;
+        events.push(appData);
+      });
+      this.events = events;
     },
+    // async getEvents(){
+    //   await calendarAxios()
+    //     .then(r => console.log(r))
+    //     .catch(e => console.error(e.message))
+    // },
 
     async addEvent(){
       if(this.name && this.start && this.end){

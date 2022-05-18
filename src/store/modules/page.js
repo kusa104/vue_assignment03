@@ -2,6 +2,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/login/LoginView.vue'
 import UserView from '@/views/UserView.vue'
 import CalendarView from '@/views/calendar/CalendarView.vue'
+import FaceVisionView from '@/views/kakao/FaceVisionView.vue'
 
 export default {
 
@@ -37,6 +38,17 @@ export default {
                     display : true
                 },
                 component : CalendarView
+            },
+            
+            faceVision : {
+                path: `/faceVision`,
+                name: `faceVision`,
+                meta: {
+                    title: `FaceVision`,
+                    icon: `table_rows`,
+                    display : true
+                },
+                component : FaceVisionView
             },
             
             user : {
